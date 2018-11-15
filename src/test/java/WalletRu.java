@@ -8,12 +8,14 @@ import static org.hamcrest.Matchers.lessThan;
 public class WalletRu {
 
 
+    private String url = "https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=volume_24h";
+
 
     @Test
     public void responseTimeLowThan500Milliseconds() {
 
         given()
-                .get("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=volume_24h")
+                .get(url)
                 .then()
                 .assertThat().time(lessThan(500L)) ;
 
@@ -26,7 +28,7 @@ public class WalletRu {
         int timeNowUnix = (int) (System.currentTimeMillis()/1000L);
 
         int s = given()
-                .get("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=volume_24h")
+                .get(url)
                 .then()
                 .extract().path("metadata.timestamp");
 
@@ -39,7 +41,7 @@ public class WalletRu {
     public void totalPackageSize() {
 
 
-        Response response = get("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=volume_24h");
+        Response response = get(url);
         assert response.asByteArray().length<=10000;
 
 
