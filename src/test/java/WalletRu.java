@@ -15,7 +15,7 @@ public class WalletRu {
         given()
                 .get("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=volume_24h")
                 .then()
-                .assertThat().time(lessThan(500L));
+                .assertThat().time(lessThan(500L)) ;
 
     }
 
